@@ -70,7 +70,25 @@ body{background:linear-gradient(135deg,#0a0a1a,#12102e,#0d0b24);min-height:100vh
 @keyframes scrollTxt{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
 .glow-card{background:linear-gradient(145deg,rgba(3,5,12,0.985),rgba(7,8,17,0.985));border:1px solid rgba(255,255,255,0.08);border-radius:1.25rem;padding:1.5rem;position:relative;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,0.58),inset 0 1px 0 rgba(255,255,255,0.025)}
 .glow-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent 35%,rgba(0,0,0,0.12));pointer-events:none;z-index:0}
-.glow-card>*:not(.money-rain){position:relative;z-index:2}
+.glow-card>*:not(.traffic-network){position:relative;z-index:2}
+ .traffic-network{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;opacity:.72;background:radial-gradient(circle at 52% 48%,rgba(59,130,246,.035),transparent 62%)}
+.traffic-chart-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.traffic-chart-grid{stroke:rgba(148,163,184,.07);stroke-width:1}
+.traffic-chart-axis{stroke:rgba(148,163,184,.11);stroke-width:1}
+.traffic-chart-line{fill:none;stroke:rgba(56,189,248,.58);stroke-width:2;filter:drop-shadow(0 0 5px rgba(56,189,248,.38));stroke-dasharray:8 10;animation:chartFlow 7s linear infinite}
+.traffic-chart-line.russia{stroke:rgba(167,139,250,.78);filter:drop-shadow(0 0 7px rgba(167,139,250,.45))}
+.traffic-candle{opacity:.46}
+.traffic-candle.up{fill:rgba(52,211,153,.72);stroke:rgba(110,231,183,.75)}
+.traffic-candle.down{fill:rgba(248,113,113,.62);stroke:rgba(252,165,165,.7)}
+.traffic-wick{stroke-width:1.2;opacity:.55}
+.traffic-volume{fill:rgba(56,189,248,.12);animation:volumePulse 3.2s ease-in-out infinite alternate}
+.traffic-volume.russia{fill:rgba(167,139,250,.16)}
+.traffic-label{font:700 8px Inter,Arial,sans-serif;fill:rgba(186,230,253,.35);letter-spacing:1.3px}
+.traffic-label.russia{fill:rgba(221,214,254,.58)}
+.traffic-live{fill:#34d399;filter:drop-shadow(0 0 5px rgba(52,211,153,.8));animation:livePulse 1.6s ease-in-out infinite}
+@keyframes chartFlow{to{stroke-dashoffset:-90}}
+@keyframes volumePulse{from{opacity:.35}to{opacity:.9}}
+@keyframes livePulse{0%,100%{opacity:.45;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
 /* Premium dashboard text glow */
 .dash-welcome-label{color:#c4b5fd !important;text-shadow:0 0 8px rgba(167,139,250,.55),0 0 18px rgba(59,130,246,.22);animation:dashTextPulse 3.2s ease-in-out infinite;position:relative;z-index:3}
 #dashName{background:linear-gradient(90deg,#fff 0%,#c4b5fd 35%,#67e8f9 68%,#fff 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent !important;text-shadow:0 0 18px rgba(167,139,250,.28);animation:dashNameShine 4s linear infinite;position:relative;z-index:3}
@@ -84,10 +102,6 @@ body{background:linear-gradient(135deg,#0a0a1a,#12102e,#0d0b24);min-height:100vh
 @keyframes dashTextPulse{0%,100%{opacity:.78;filter:brightness(.95)}50%{opacity:1;filter:brightness(1.18)}}
 @keyframes dashNameShine{0%{background-position:0% 50%}100%{background-position:220% 50%}}
 
-.money-rain{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;opacity:1}
-.dollar-coin{position:absolute;top:-56px;left:var(--x);width:var(--size);height:var(--size);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Georgia,'Times New Roman',serif;font-size:calc(var(--size) * .48);font-weight:900;color:#fffbd0;background:radial-gradient(circle at 32% 27%,#fff9bf 0 9%,#f7dc71 25%,#c69a27 58%,#74520b 100%);border:2px solid rgba(255,239,137,.82);box-shadow:0 0 0 1px rgba(67,45,3,.85),0 4px 16px rgba(245,196,55,.38),inset 2px 2px 5px rgba(255,255,255,.62),inset -4px -5px 7px rgba(62,40,3,.5);text-shadow:0 1px 2px rgba(55,36,0,.85);animation:coinFall var(--duration) linear var(--delay) infinite;transform:rotate(var(--rotate));will-change:transform,top;backface-visibility:hidden}
-.dollar-coin::after{content:'$';position:absolute;inset:3px;border-radius:50%;border:1px solid rgba(255,248,182,.45);display:flex;align-items:center;justify-content:center;font-size:calc(var(--size) * .42)}
-@keyframes coinFall{0%{top:-56px;transform:translate3d(0,0,0) rotate(var(--rotate));opacity:0}7%{opacity:1}48%{transform:translate3d(var(--drift),0,0) rotate(calc(var(--rotate) + 210deg));opacity:.98}88%{opacity:.88}100%{top:calc(100% + 56px);transform:translate3d(calc(var(--drift) * -0.55),0,0) rotate(calc(var(--rotate) + 420deg));opacity:0}}
 .balance-big{font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#f59e0b,#ef4444,#ec4899,#8b5cf6,#3b82f6);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:balanceShift 5s ease infinite;letter-spacing:-1px}
 @keyframes balanceShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .stat-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:1.25rem;display:flex;align-items:center;gap:14px;transition:all .3s}
@@ -266,7 +280,7 @@ body{background:linear-gradient(135deg,#0a0a1a,#12102e,#0d0b24);min-height:100vh
 <main style="flex:1;padding:20px;max-width:920px;margin:0 auto;width:100%">
 
 <div id="view-dashboard" class="view-section">
-<div class="glow-card" style="margin-bottom:24px"><div class="money-rain" aria-hidden="true" id="moneyRain"></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px"><div><p class="dash-welcome-label" style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2.5px;font-weight:700">Welcome back</p><h2 id="dashName" style="font-size:1.8rem;font-weight:900;color:#fff;margin-top:6px">User</h2><p class="dash-phone" style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:6px;font-weight:500"><i class="fas fa-phone-alt dash-phone-icon" style="margin-right:6px;font-size:11px;color:rgba(255,255,255,0.25)"></i><span id="dashPhone">N/A</span></p></div><div style="display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;justify-content:center"><div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:14px 18px;min-width:125px;text-align:center"><p class="dash-stat-label dash-balance-label" style="font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.8px;font-weight:700">Total Balance</p><div style="font-size:1.45rem;font-weight:900;color:#fff;margin-top:5px">$<span id="dashBalance">0.00</span></div></div><div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:18px;padding:14px 18px;min-width:125px;text-align:center"><p class="dash-stat-label dash-spent-label" style="font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.8px;font-weight:700">Total Spent</p><div style="font-size:1.45rem;font-weight:900;color:#34d399;margin-top:5px">$<span id="dashSpent">0.00</span></div></div></div></div></div>
+<div class="glow-card" style="margin-bottom:24px"><div class="traffic-network" aria-hidden="true" id="trafficNetwork"></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px"><div><p class="dash-welcome-label" style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2.5px;font-weight:700">Welcome back</p><h2 id="dashName" style="font-size:1.8rem;font-weight:900;color:#fff;margin-top:6px">User</h2><p class="dash-phone" style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:6px;font-weight:500"><i class="fas fa-phone-alt dash-phone-icon" style="margin-right:6px;font-size:11px;color:rgba(255,255,255,0.25)"></i><span id="dashPhone">N/A</span></p></div><div style="display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;justify-content:center"><div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:14px 18px;min-width:125px;text-align:center"><p class="dash-stat-label dash-balance-label" style="font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.8px;font-weight:700">Total Balance</p><div style="font-size:1.45rem;font-weight:900;color:#fff;margin-top:5px">$<span id="dashBalance">0.00</span></div></div><div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:18px;padding:14px 18px;min-width:125px;text-align:center"><p class="dash-stat-label dash-spent-label" style="font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.8px;font-weight:700">Total Spent</p><div style="font-size:1.45rem;font-weight:900;color:#34d399;margin-top:5px">$<span id="dashSpent">0.00</span></div></div></div></div></div>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
 <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#fbbf24"><i class="fas fa-clock"></i></div><div><p class="stat-label">Pending</p><h3 id="statPending" class="stat-value">0</h3></div></div>
 <div class="stat-card"><div class="stat-icon" style="background:rgba(59,130,246,0.1);color:#60a5fa"><i class="fas fa-rocket"></i></div><div><p class="stat-label">Active</p><h3 id="statActive" class="stat-value">0</h3></div></div>
@@ -438,22 +452,35 @@ document.getElementById('mainPanel').style.display='none';
 document.getElementById('authSection').style.display='flex';
 }
 
-function initMoneyRain(){
-var rain=document.getElementById('moneyRain');
-if(!rain||rain.dataset.ready==='1')return;
-rain.dataset.ready='1';
-for(var i=0;i<28;i++){
-var coin=document.createElement('span');
-coin.className='dollar-coin';
-coin.textContent='';
-coin.style.setProperty('--x',(1+Math.random()*97).toFixed(1)+'%');
-coin.style.setProperty('--size',(20+Math.random()*18).toFixed(0)+'px');
-coin.style.setProperty('--duration',(4.2+Math.random()*4.8).toFixed(2)+'s');
-coin.style.setProperty('--delay',(-Math.random()*8).toFixed(2)+'s');
-coin.style.setProperty('--drift',(-34+Math.random()*68).toFixed(0)+'px');
-coin.style.setProperty('--rotate',(-55+Math.random()*110).toFixed(0)+'deg');
-rain.appendChild(coin);
+function initTrafficNetwork(){
+var net=document.getElementById('trafficNetwork');
+if(!net||net.dataset.ready==='1')return;
+net.dataset.ready='1';
+var ns='http://www.w3.org/2000/svg';
+var svg=document.createElementNS(ns,'svg');
+svg.setAttribute('class','traffic-chart-svg');svg.setAttribute('viewBox','0 0 1000 420');svg.setAttribute('preserveAspectRatio','none');
+var defs=document.createElementNS(ns,'defs');
+var grad=document.createElementNS(ns,'linearGradient');grad.setAttribute('id','trafficAreaGrad');grad.setAttribute('x1','0');grad.setAttribute('y1','0');grad.setAttribute('x2','0');grad.setAttribute('y2','1');
+var st1=document.createElementNS(ns,'stop');st1.setAttribute('offset','0%');st1.setAttribute('stop-color','#38bdf8');st1.setAttribute('stop-opacity','.10');
+var st2=document.createElementNS(ns,'stop');st2.setAttribute('offset','100%');st2.setAttribute('stop-color','#38bdf8');st2.setAttribute('stop-opacity','0');grad.appendChild(st1);grad.appendChild(st2);defs.appendChild(grad);svg.appendChild(defs);
+for(var gy=70;gy<=350;gy+=70){var gl=document.createElementNS(ns,'line');gl.setAttribute('x1',35);gl.setAttribute('y1',gy);gl.setAttribute('x2',965);gl.setAttribute('y2',gy);gl.setAttribute('class','traffic-chart-grid');svg.appendChild(gl);}
+for(var gx=80;gx<=940;gx+=86){var vl=document.createElementNS(ns,'line');vl.setAttribute('x1',gx);vl.setAttribute('y1',35);vl.setAttribute('x2',gx);vl.setAttribute('y2',370);vl.setAttribute('class','traffic-chart-grid');svg.appendChild(vl);}
+var linePts=[], x=40, prev=205;
+for(var i=0;i<34;i++){var drift=(Math.random()-.46)*42;prev=Math.max(75,Math.min(330,prev+drift));linePts.push([x,prev]);x+=28;}
+var area=document.createElementNS(ns,'path');var areaD='M '+linePts[0][0]+' 360 L ';for(i=0;i<linePts.length;i++)areaD+=linePts[i][0]+' '+linePts[i][1]+' '+(i<linePts.length-1?'L ':'');areaD+='L '+linePts[linePts.length-1][0]+' 360 Z';area.setAttribute('d',areaD);area.setAttribute('fill','url(#trafficAreaGrad)');area.setAttribute('opacity','.55');svg.appendChild(area);
+for(i=0;i<linePts.length;i++){
+ var cx=linePts[i][0],cy=linePts[i][1],open=cy+(Math.random()-.5)*28,close=cy+(Math.random()-.5)*28,high=Math.min(open,close)-8-Math.random()*20,low=Math.max(open,close)+8+Math.random()*20;
+ var wick=document.createElementNS(ns,'line');wick.setAttribute('x1',cx);wick.setAttribute('y1',high);wick.setAttribute('x2',cx);wick.setAttribute('y2',low);wick.setAttribute('class','traffic-wick');wick.setAttribute('stroke',close>=open?'#34d399':'#f87171');svg.appendChild(wick);
+ var body=document.createElementNS(ns,'rect');body.setAttribute('x',cx-6);body.setAttribute('y',Math.min(open,close));body.setAttribute('width',12);body.setAttribute('height',Math.max(6,Math.abs(close-open)));body.setAttribute('rx',2);body.setAttribute('class','traffic-candle '+(close>=open?'up':'down'));svg.appendChild(body);
+ var vb=document.createElementNS(ns,'rect');vb.setAttribute('x',cx-6);vb.setAttribute('y',365-(Math.abs(close-open)+8)*1.25);vb.setAttribute('width',12);vb.setAttribute('height',(Math.abs(close-open)+8)*1.25);vb.setAttribute('class','traffic-volume'+(i%5===0?' russia':''));vb.style.animationDelay=(-Math.random()*3)+'s';svg.appendChild(vb);
 }
+var path=document.createElementNS(ns,'path');var d='M '+linePts[0][0]+' '+linePts[0][1];for(i=1;i<linePts.length;i++)d+=' L '+linePts[i][0]+' '+linePts[i][1];path.setAttribute('d',d);path.setAttribute('class','traffic-chart-line');svg.appendChild(path);
+var russiaPts=[[55,285],[115,255],[175,270],[235,225],[295,245],[355,195],[415,215],[475,165],[535,185],[595,135],[655,155],[715,118],[775,145],[835,105],[895,125],[955,82]];
+var rpath=document.createElementNS(ns,'path');var rd='M '+russiaPts[0][0]+' '+russiaPts[0][1];for(i=1;i<russiaPts.length;i++)rd+=' L '+russiaPts[i][0]+' '+russiaPts[i][1];rpath.setAttribute('d',rd);rpath.setAttribute('class','traffic-chart-line russia');svg.appendChild(rpath);
+function label(txt,x,y,cls){var t=document.createElementNS(ns,'text');t.textContent=txt;t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('class','traffic-label'+(cls?' '+cls:''));svg.appendChild(t)}
+label('LIVE TRAFFIC',42,28,'');label('VISITORS / FLOW',790,28,'');label('RUSSIA TRAFFIC',42,398,'russia');label('USA',170,74,'');label('CANADA',335,74,'');label('GERMANY',500,74,'');label('UK',665,74,'');label('RUSSIA',830,74,'russia');
+var live=document.createElementNS(ns,'circle');live.setAttribute('cx',755);live.setAttribute('cy',24);live.setAttribute('r',4);live.setAttribute('class','traffic-live');svg.appendChild(live);
+net.appendChild(svg);
 }
 
 function enterPanel(){
@@ -462,7 +489,7 @@ document.getElementById('mainPanel').style.display='block';
 document.getElementById('dashName').textContent=currentUser.username||'User';
 document.getElementById('dashPhone').textContent=currentUser.phone||'N/A';
 updateBalanceDisplay();
-initMoneyRain();
+initTrafficNetwork();
 if(currentUser.role==='admin'){document.getElementById('adminNav').style.display='block';}else{document.getElementById('adminNav').style.display='none';}
 setupListeners();
 }
