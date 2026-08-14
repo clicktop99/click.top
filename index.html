@@ -68,9 +68,13 @@ body{background:linear-gradient(135deg,#0a0a1a,#12102e,#0d0b24);min-height:100vh
 @keyframes scrollBg{0%{background-position:0% 50%}100%{background-position:400% 50%}}
 .scroll-text{display:inline-block;white-space:nowrap;animation:scrollTxt 14s linear infinite;color:#fff;font-weight:700;font-size:12.5px}
 @keyframes scrollTxt{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
-.glow-card{background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(236,72,153,0.08));border:1px solid rgba(124,58,237,0.25);border-radius:1.25rem;padding:1.5rem;position:relative;overflow:hidden}
-.glow-card::before{content:'';position:absolute;inset:-2px;border-radius:1.25rem;background:conic-gradient(from 0deg,#7c3aed,#ec4899,#f59e0b,#10b981,#3b82f6,#7c3aed);z-index:-1;animation:glowSpin 8s linear infinite;opacity:.5;filter:blur(8px)}
-@keyframes glowSpin{to{transform:rotate(360deg)}}
+.glow-card{background:linear-gradient(145deg,rgba(3,5,12,0.985),rgba(7,8,17,0.985));border:1px solid rgba(255,255,255,0.08);border-radius:1.25rem;padding:1.5rem;position:relative;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,0.58),inset 0 1px 0 rgba(255,255,255,0.025)}
+.glow-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent 35%,rgba(0,0,0,0.12));pointer-events:none;z-index:0}
+.glow-card>*:not(.money-rain){position:relative;z-index:2}
+.money-rain{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;opacity:1}
+.dollar-coin{position:absolute;top:-56px;left:var(--x);width:var(--size);height:var(--size);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Georgia,'Times New Roman',serif;font-size:calc(var(--size) * .48);font-weight:900;color:#fffbd0;background:radial-gradient(circle at 32% 27%,#fff9bf 0 9%,#f7dc71 25%,#c69a27 58%,#74520b 100%);border:2px solid rgba(255,239,137,.82);box-shadow:0 0 0 1px rgba(67,45,3,.85),0 4px 16px rgba(245,196,55,.38),inset 2px 2px 5px rgba(255,255,255,.62),inset -4px -5px 7px rgba(62,40,3,.5);text-shadow:0 1px 2px rgba(55,36,0,.85);animation:coinFall var(--duration) linear var(--delay) infinite;transform:rotate(var(--rotate));will-change:transform,top;backface-visibility:hidden}
+.dollar-coin::after{content:'$';position:absolute;inset:3px;border-radius:50%;border:1px solid rgba(255,248,182,.45);display:flex;align-items:center;justify-content:center;font-size:calc(var(--size) * .42)}
+@keyframes coinFall{0%{top:-56px;transform:translate3d(0,0,0) rotate(var(--rotate));opacity:0}7%{opacity:1}48%{transform:translate3d(var(--drift),0,0) rotate(calc(var(--rotate) + 210deg));opacity:.98}88%{opacity:.88}100%{top:calc(100% + 56px);transform:translate3d(calc(var(--drift) * -0.55),0,0) rotate(calc(var(--rotate) + 420deg));opacity:0}}
 .balance-big{font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#f59e0b,#ef4444,#ec4899,#8b5cf6,#3b82f6);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:balanceShift 5s ease infinite;letter-spacing:-1px}
 @keyframes balanceShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .stat-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:1.25rem;display:flex;align-items:center;gap:14px;transition:all .3s}
@@ -249,7 +253,7 @@ body{background:linear-gradient(135deg,#0a0a1a,#12102e,#0d0b24);min-height:100vh
 <main style="flex:1;padding:20px;max-width:920px;margin:0 auto;width:100%">
 
 <div id="view-dashboard" class="view-section">
-<div class="glow-card" style="margin-bottom:24px"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px"><div><p style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2.5px;font-weight:700">Welcome back</p><h2 id="dashName" style="font-size:1.8rem;font-weight:900;color:#fff;margin-top:6px">User</h2><p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:6px;font-weight:500"><i class="fas fa-phone-alt" style="margin-right:6px;font-size:11px;color:rgba(255,255,255,0.25)"></i><span id="dashPhone">N/A</span></p></div><div style="display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;justify-content:center"><div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:14px 18px;min-width:125px;text-align:center"><p style="font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.8px;font-weight:700">Total Balance</p><div style="font-size:1.45rem;font-weight:900;color:#fff;margin-top:5px">$<span id="dashBalance">0.00</span></div></div><div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:18px;padding:14px 18px;min-width:125px;text-align:center"><p style="font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.8px;font-weight:700">Total Spent</p><div style="font-size:1.45rem;font-weight:900;color:#34d399;margin-top:5px">$<span id="dashSpent">0.00</span></div></div></div></div></div>
+<div class="glow-card" style="margin-bottom:24px"><div class="money-rain" aria-hidden="true" id="moneyRain"></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px"><div><p style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2.5px;font-weight:700">Welcome back</p><h2 id="dashName" style="font-size:1.8rem;font-weight:900;color:#fff;margin-top:6px">User</h2><p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:6px;font-weight:500"><i class="fas fa-phone-alt" style="margin-right:6px;font-size:11px;color:rgba(255,255,255,0.25)"></i><span id="dashPhone">N/A</span></p></div><div style="display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;justify-content:center"><div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:14px 18px;min-width:125px;text-align:center"><p style="font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.8px;font-weight:700">Total Balance</p><div style="font-size:1.45rem;font-weight:900;color:#fff;margin-top:5px">$<span id="dashBalance">0.00</span></div></div><div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:18px;padding:14px 18px;min-width:125px;text-align:center"><p style="font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.8px;font-weight:700">Total Spent</p><div style="font-size:1.45rem;font-weight:900;color:#34d399;margin-top:5px">$<span id="dashSpent">0.00</span></div></div></div></div></div>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
 <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#fbbf24"><i class="fas fa-clock"></i></div><div><p class="stat-label">Pending</p><h3 id="statPending" class="stat-value">0</h3></div></div>
 <div class="stat-card"><div class="stat-icon" style="background:rgba(59,130,246,0.1);color:#60a5fa"><i class="fas fa-rocket"></i></div><div><p class="stat-label">Active</p><h3 id="statActive" class="stat-value">0</h3></div></div>
@@ -285,7 +289,7 @@ body{background:linear-gradient(135deg,#0a0a1a,#12102e,#0d0b24);min-height:100vh
 <div class="info-box info-emerald"><div><h4 style="font-weight:800;color:#6ee7b7;margin-bottom:10px;font-size:14px">Important:</h4><ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;font-size:13px" id="rulesImportantList"></ul></div></div>
 </div></div>
 
-<div id="view-contact" class="view-section" style="display:none"><div style="max-width:400px;margin:0 auto;text-align:center"><div style="width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(59,130,246,0.05));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:36px;color:#60a5fa;border:1px solid rgba(59,130,246,0.15)"><i class="fab fa-telegram"></i></div><h3 style="font-weight:900;color:#fff;font-size:22px;margin-bottom:8px">Telegram Support</h3><p style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:24px">Facing issues? Reach out via Telegram.</p><a href="https://t.me/AnastasiaSupport1" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-weight:700;padding:14px 32px;border-radius:14px;text-decoration:none;font-size:15px;box-shadow:0 4px 20px rgba(37,99,235,0.3)"><i class="fab fa-telegram" style="font-size:18px"></i> Chat on Telegram</a></div></div>
+<div id="view-contact" class="view-section" style="display:none"><div style="max-width:400px;margin:0 auto;text-align:center"><div style="width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(59,130,246,0.05));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:36px;color:#60a5fa;border:1px solid rgba(59,130,246,0.15)"><i class="fab fa-telegram"></i></div><h3 style="font-weight:900;color:#fff;font-size:22px;margin-bottom:8px">Telegram Support</h3><p style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:24px">Facing issues? Reach out via Telegram.</p><a href="https://t.me/nahid63550" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-weight:700;padding:14px 32px;border-radius:14px;text-decoration:none;font-size:15px;box-shadow:0 4px 20px rgba(37,99,235,0.3)"><i class="fab fa-telegram" style="font-size:18px"></i> Chat on Telegram</a></div></div>
 
 <div id="view-adminDash" class="view-section" style="display:none"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
 <div class="stat-card" style="flex-direction:column;align-items:flex-start;gap:10px"><div class="stat-icon" style="background:rgba(124,58,237,0.1);color:#a78bfa"><i class="fas fa-users"></i></div><p class="stat-label">Total Users</p><h3 id="adminTotalUsers" class="stat-value">0</h3></div>
@@ -421,12 +425,31 @@ document.getElementById('mainPanel').style.display='none';
 document.getElementById('authSection').style.display='flex';
 }
 
+function initMoneyRain(){
+var rain=document.getElementById('moneyRain');
+if(!rain||rain.dataset.ready==='1')return;
+rain.dataset.ready='1';
+for(var i=0;i<28;i++){
+var coin=document.createElement('span');
+coin.className='dollar-coin';
+coin.textContent='';
+coin.style.setProperty('--x',(1+Math.random()*97).toFixed(1)+'%');
+coin.style.setProperty('--size',(20+Math.random()*18).toFixed(0)+'px');
+coin.style.setProperty('--duration',(4.2+Math.random()*4.8).toFixed(2)+'s');
+coin.style.setProperty('--delay',(-Math.random()*8).toFixed(2)+'s');
+coin.style.setProperty('--drift',(-34+Math.random()*68).toFixed(0)+'px');
+coin.style.setProperty('--rotate',(-55+Math.random()*110).toFixed(0)+'deg');
+rain.appendChild(coin);
+}
+}
+
 function enterPanel(){
 document.getElementById('authSection').style.display='none';
 document.getElementById('mainPanel').style.display='block';
 document.getElementById('dashName').textContent=currentUser.username||'User';
 document.getElementById('dashPhone').textContent=currentUser.phone||'N/A';
 updateBalanceDisplay();
+initMoneyRain();
 if(currentUser.role==='admin'){document.getElementById('adminNav').style.display='block';}else{document.getElementById('adminNav').style.display='none';}
 setupListeners();
 }
